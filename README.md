@@ -1,1 +1,1 @@
-Hello!
+This is my second implementation of a trading engine. Now that I have learned concurrency and System Design here is my second attempt with a different idea of a trading engine and a different approach. 
