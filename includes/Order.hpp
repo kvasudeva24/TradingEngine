@@ -1,11 +1,11 @@
-
+#pragma once
+#include "OrderBook.hpp"
 
 
 
 /*
 we mark the Order class as final so no other class can inherit
 */
-
 class Order final{
 
 private:
@@ -22,10 +22,6 @@ private:
     */ 
 
 
-
-
-
-public:
     Order();
     ~Order();
 
@@ -50,5 +46,11 @@ public:
     int getId() const;
     bool getSide() const;
 
+    
+    void changeShares(double new_shares_);
+
+    friend class Orderbook;
 
 };
+
+void dummy();

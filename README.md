@@ -9,7 +9,11 @@ when orders come in would be easier
 This is also because algorithmic trading looks to see what signals there are for a commodity based on the book to place orders. This way, it is easier to keep a copy in memory (cache or DRAM)?
 
 
-There are two parts to a class
+This means for every commodity or equity they need to keep a copy of the internal book in memory
+This leads to some issues, mainly that the book should be the only thing to place an order (we would not want another book to have an order that doesnt belong)
+
+
+There are two parts to an orderbook
 
 1. Order
 2. Book of Orders
@@ -34,4 +38,20 @@ Getters
 Furthermore, for our ID's we would have our Orderbook keep track of it. This is because we would want our orders to live dynamically on the heap becuase too many orders could cause overflow
 Thus, we need pointers to keep track of the memory where the order actually lives
 
+The complexity here is because we need some class Order but all of its internals should be hidden to everyone but an orderbook, and the orderbook should be the only one making orders, we mark most methods as private make the orderbook a friend
+
 See Order.hpp for design and Order.cpp for implementation
+
+
+
+
+
+
+
+
+
+
+To compile run this in the terminal
+
+clang++ -std=c++23 -Wall -Wextra -Werror -I includes src/Order.cpp src/OrderBook.cpp src/main.cpp -o test
+./test
