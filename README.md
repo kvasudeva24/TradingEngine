@@ -25,17 +25,17 @@ At a high level when the exchange or firm is creating an order they need to keep
 3. shares
 4. side (buy or sell)
 
-When a data parser reads data,  it should only have access to the orderbook itself in which in one call will create the order and then place it on the book and either match it as much as it can and/or place it on the book
+When a data parser reads data,  when it tries to create an order it should only have access to the orderbook itself in which in one call will create the order and then place it on the book and either match it as much as it can and/or place it on the book
 
 Here are some theoretical internals of an Order Class
 
 Private Variables
 Constructor
 Destructor
-Getters
 (notice we do not want setters because once we place an order, the only thing we could possibly change abt the order is deleting it entirely)
 
-Furthermore, for our ID's we would have our Orderbook keep track of it. This is because we would want our orders to live dynamically on the heap becuase too many orders could cause overflow
+Furthermore, for our ID's we would have our Orderbook keep track of it. 
+We would want our orders to live dynamically on the heap becuase too many orders could cause overflow
 Thus, we need pointers to keep track of the memory where the order actually lives
 
 The complexity here is because we need some class Order but all of its internals should be hidden to everyone but an orderbook, and the orderbook should be the only one making orders, we mark most methods as private make the orderbook a friend

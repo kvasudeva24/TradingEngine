@@ -1,7 +1,12 @@
 #pragma once
 #include "OrderBook.hpp"
+#include <iostream>
 
 
+using Price = double;
+using Shares = double;
+using ID = int;
+using Side = bool;
 
 /*
 we mark the Order class as final so no other class can inherit
@@ -9,10 +14,10 @@ we mark the Order class as final so no other class can inherit
 class Order final{
 
 private:
-    double price_;
-    double shares_;
-    int id_;
-    bool side_;
+    Price price_;
+    Shares shares_;
+    ID id_;
+    Side side_;
     /* we will denote 0/false as buy order and 1/true as a sell order
 
     Note: This is the most optimal way to structure this class due to padding and aligment
@@ -22,7 +27,7 @@ private:
     */ 
 
 
-    Order();
+    explicit Order(Price p, Shares s, ID id, Side side);
     ~Order();
 
 
@@ -38,19 +43,17 @@ private:
     Order& operator=(Order&& other) = delete;
 
     /*
-    We have getters that are marked as const because we do not want the orderbook to be able to modify orders while they are on the book or anything outside the class
-    Marking the methods as const/read only ensure we are not able to change as we read
+    We dont need any getters or setters because the only thing that can interact with an order is the orderbook holding that commodity/equity
+    We create one setter 'changeShares' for code readability (may not need because performance overhead with ptrs and vtable)
     */
-    double getPrice() const;
-    double getShares() const;
-    int getId() const;
-    bool getSide() const;
 
     
-    void changeShares(double new_shares_);
+    void changeShares(Shares new_shares);
 
-    friend class Orderbook;
 
+
+    friend class OrderBook;
+
+    friend std::ostream& operator<<(std::ostream& os, const Order& order);
 };
 
-void dummy();
