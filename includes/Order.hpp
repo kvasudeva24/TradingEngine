@@ -27,8 +27,8 @@ private:
     */ 
 
 
-    explicit Order(Price p, Shares s, ID id, Side side);
-    ~Order();
+    explicit Order(Price p, Shares s, ID id, Side side) noexcept;
+    ~Order() noexcept;
 
 
     /*
@@ -48,7 +48,7 @@ private:
     */
 
     
-    void changeShares(Shares new_shares);
+    void changeShares(Shares new_shares) noexcept;
 
 
 
