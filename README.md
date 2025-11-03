@@ -44,14 +44,28 @@ See Order.hpp for design and Order.cpp for implementation
 
 
 
+Now for the OrderBook we need a lot of underlying data structures
+
+Generally we need O(1) lookup, O(1) insertion, O(1) deletion
+
+Every price level should keep track of the orders on that side of the book in some sort of queue.
+This is because we need FIFO logic as orders first to come are the orders first to get matched
+
+We also need to keep track of the current best bid, and the current best ask so that if an order were to come in we need to check if it crosses the matching line and if it does erase it
+
+For deletion we would need to map ID numbers to the actual order so that you can get that O(1) deletion
+
+If we delete from the middle of a price level, we would need to be able to "skip" that order so we would need some sort of O(1) deletion from the middle of an array/list. It would be useful to use a DoublyLinkedList. 
+
+This is because if we are trying to match an order, we care about the one after it, so we need some sort of next pointer, and we care about the one before it (as we mark prev next to curr next). When we delete, we "skip" and move on. When we process, we match the order if the it is fully matched we delete from the list and then move to the next.
+
+For every node in the list, we need to allocate two pointers
+
+We create our own PriceList as a DoublyLinkedList of Orders. We modify Orders to have a next and prev private variable and also mark PriceList class as a friend to be able to work with these pointers. The OrderClass SHOULD NOT modify these pointers at ALL. That is the job of the PriceList class. Since we allocate inside OrderBook, PriceList is a class that moves pointers when passed Order* into its APIs
 
 
 
-
-
-
-
-To compile run this in the terminal
+To compile run this in the terminal (still in progress as I build out - will be wrong)
 
 clang++ -std=c++23 -Wall -Wextra -Werror -I includes src/Order.cpp src/OrderBook.cpp src/main.cpp -o test
 ./test

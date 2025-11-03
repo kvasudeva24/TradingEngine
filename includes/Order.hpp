@@ -1,5 +1,6 @@
 #pragma once
 #include "OrderBook.hpp"
+#include "PriceList.hpp"
 #include <iostream>
 
 
@@ -14,6 +15,8 @@ we mark the Order class as final so no other class can inherit
 class Order final{
 
 private:
+    Order* prev_ = nullptr;
+    Order* next_ = nullptr;
     Price price_;
     Shares shares_;
     ID id_;
@@ -21,7 +24,7 @@ private:
     /* we will denote 0/false as buy order and 1/true as a sell order
 
     Note: This is the most optimal way to structure this class due to padding and aligment
-    The size of an Order is 24 bytes
+    The size of an Order is 40 bytes
 
     While there are compiler optimzations that will optimize if we put it out of order, knowing the baseline structure is important
     */ 
@@ -53,6 +56,7 @@ private:
 
 
     friend class OrderBook;
+    friend class PriceList;
     
     friend std::ostream& operator<<(std::ostream& os, const Order& order);
 };
