@@ -4,7 +4,7 @@
 
 
 int main (){
-    dummy();
+
     std::cout << "Compiles properly :)" << std::endl;
     return 0; 
 }

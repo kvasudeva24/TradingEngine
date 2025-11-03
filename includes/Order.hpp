@@ -5,7 +5,7 @@
 
 using Price = double;
 using Shares = double;
-using ID = int;
+using ID = unsigned int;
 using Side = bool;
 
 /*
@@ -53,7 +53,7 @@ private:
 
 
     friend class OrderBook;
-
+    
     friend std::ostream& operator<<(std::ostream& os, const Order& order);
 };
 
