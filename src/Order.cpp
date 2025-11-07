@@ -6,10 +6,6 @@ Order::Order(Price p, Shares s, ID id, Side side) : price_(p), shares_(s), id_(i
 Order::~Order() = default;
 //because primitive types we can have the compiler generated default destructor (will get called with delete)
 
-void Order::changeShares(Shares new_shares){
-    shares_ = new_shares;
-}
-
 std::ostream& operator<<(std::ostream& os, const Order& order){
     std::string side = (order.side_) ? "SELL" : "BUY";
 
