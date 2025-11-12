@@ -23,12 +23,18 @@ private:
     std::unordered_map<Price, PriceList> ask_book;
     Price best_bid = __DBL_MIN__;
     Price best_ask = __DBL_MAX__;
-    ID id_ = 1;
+    ID id_ = 1; 
 
+    void walkBidBook(Order* order);
+    inline void placeBidOrder(Order* order);
 
-
+    void walkAskBook(Order* order);
+    inline void placeSellOrder(Order* order);
 
     
+    
+
+
 
 
 
@@ -37,7 +43,15 @@ private:
 
 public:
     void insertSellOrder(Price p, Shares s);
-    void inserBuyOrder(Price p, Shares s);
+    void insertBuyOrder(Price p, Shares s);
     void cancelOrder(ID id);
     Order getOrder(ID id) const;
+
+    OrderBook() = default;
+    ~OrderBook() = default;
+    OrderBook(const OrderBook& rhs) = delete;
+    OrderBook& operator=(const OrderBook& rhs) = delete;
+    OrderBook(OrderBook&& rhs) = delete;
+    OrderBook& operator=(OrderBook&& rhs) = delete;
+
 };

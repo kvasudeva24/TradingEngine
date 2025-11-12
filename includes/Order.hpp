@@ -59,6 +59,7 @@
         friend class PriceList;
         
         friend std::ostream& operator<<(std::ostream& os, const Order& order);
+
         
     public:
 
@@ -69,5 +70,6 @@
         ID getId() const {return id_;};
         Side getSide() const {return side_;};
 
+        void setShares(Shares s) { shares_  = s;};
     };
 
