@@ -20,7 +20,7 @@ private:
     unsigned int size_ = 0;
 
     PriceList();
-    ~PriceList();
+    
 
     void add_order(Order* order);
 
@@ -32,7 +32,15 @@ private:
     */
     void remove_order(Order* order);
 
+    //for when we walk the book we need to return the top order off
+
+
 
     friend class OrderBook;
     friend std::ostream& operator<<(std::ostream& os, const PriceList& list);
+
+    public:
+    ~PriceList();
+    Order* remove_front();
+    unsigned int getSize() {return size_ ;};
 };

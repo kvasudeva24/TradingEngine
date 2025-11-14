@@ -41,6 +41,18 @@ void PriceList::remove_order(Order* order){
     size_--;
 }
 
+Order* PriceList::remove_front(){
+    //assume that this is only called when the size is > 0
+
+    Order* to_remove = head_->next_;
+    Order* new_head = to_remove->next_;
+    new_head->prev_ = head_;
+    head_->next_ = new_head;
+    size_--;
+    return to_remove;
+
+}
+
 std::ostream& operator<<(std::ostream& os, const PriceList& list){
 
     Order* iter = list.head_;

@@ -14,6 +14,9 @@ class OrderBook{
 
     static constexpr Side BUY = false;
     static constexpr Side SELL = true;
+
+    //we can assume this will be helpful as stocks are 
+    //usually concentrated close together on share prices
     static constexpr double TICK_SIZE = 0.01;
 
 private:
@@ -24,6 +27,8 @@ private:
     Price best_bid = __DBL_MIN__;
     Price best_ask = __DBL_MAX__;
     ID id_ = 1; 
+
+    void removeOrder(ID id);
 
     void walkBidBook(Order* order);
     inline void placeBidOrder(Order* order);
